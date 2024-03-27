@@ -21,7 +21,7 @@ type ListProviderBeritaProps =
 export const useStore = defineStore("store", {
   state: () => ({
     berita: {
-      providerBerita: ref<string>("antara"),
+      providerBerita: ref<string>("kumparan"),
       listProviderBerita: ref<ListProviderBeritaProps[]>([
         "antara",
         "cnbc",
@@ -47,7 +47,21 @@ export const useStore = defineStore("store", {
     async getAsmaulHusna(): Promise<AsmaulHusnaProps[] | undefined> {
       try {
         const response = await ofetch(
-          `${ASMAUL_HUSNA_API}/api/all?page=${this.asmaulHusna.page}&limit=${this.asmaulHusna.limit}`,
+          `${ASMAUL_HUSNA_API}/api/all?page=${
+            /**
+             * Detect if the user's page is not synchron with the page value from API
+             * And change the user's page value to default(1)
+             */
+            this.asmaulHusna.limit === 20 && this.asmaulHusna.page > 5
+              ? (this.asmaulHusna.page = 1)
+              : this.asmaulHusna.limit === 30 && this.asmaulHusna.page > 4
+              ? (this.asmaulHusna.page = 1)
+              : this.asmaulHusna.limit === 40 && this.asmaulHusna.page > 3
+              ? (this.asmaulHusna.page = 1)
+              : this.asmaulHusna.limit === 50 && this.asmaulHusna.page > 2
+              ? (this.asmaulHusna.page = 1)
+              : this.asmaulHusna.page
+          }&limit=${this.asmaulHusna.limit}`,
           {
             method: "GET",
             parseResponse: JSON.parse,
@@ -55,7 +69,7 @@ export const useStore = defineStore("store", {
           }
         );
 
-        this.asmaulHusna.pagesList = new Array(Math.round(99 / this.asmaulHusna.limit))
+        this.asmaulHusna.pagesList = new Array(Math.ceil(99 / this.asmaulHusna.limit))
           .fill(null)
           .map((_, index) => index + 1);
 
