@@ -41,7 +41,7 @@ function setLimit(e: Event) {
         <div>
           <span class="mr-3 font-medium">Select limit per page</span>
           <select
-            name="fruit"
+            name="asmaul-husna"
             @change="setLimit"
             v-model="state.asmaulHusna.limit"
             class="text-neutral-950"
