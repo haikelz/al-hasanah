@@ -3,14 +3,14 @@
   "style": "default",
   "typescript": true,
   "tailwind": {
-    "config": "tailwind.config.js",
-    "css": "src/assets/main.css",
+    "config": "tailwind.config.ts",
+    "css": "assets/styles/main.css",
     "baseColor": "neutral",
     "cssVariables": true
   },
-  "framework": "vite",
+  "framework": "nuxt",
   "aliases": {
-    "components": "@/components",
-    "utils": "@/lib/helpers"
+    "components": "~/components",
+    "utils": "~/lib/utils"
   }
 }
