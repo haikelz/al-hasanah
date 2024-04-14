@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useQuery } from "@tanstack/vue-query";
 import TransitionLayout from "~/components/TransitionLayout.vue";
 import {
   Card,
@@ -7,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
+import { decodeHtml } from "~/lib/utils";
 import { useStore } from "~/store";
-import { useQuery } from "@tanstack/vue-query";
 
 useSeoMeta({
   title: "Berita",
@@ -38,16 +39,9 @@ function setFallbackImage(e: Event) {
 
 <template>
   <TransitionLayout
-    class="min-h-screen flex justify-center w-full items-center pt-24 pb-12 flex-col"
+    class="min-h-screen flex justify-start w-full items-center pt-24 pb-12 flex-col"
   >
-    <span class="font-bold text-xl" v-if="isPending || isRefetching"
-      >Loading....</span
-    >
-    <span class="font-bold text-xl" v-if="isError">{{ error?.message }}</span>
-    <div
-      class="flex flex-col justify-center items-center"
-      v-if="data?.length && !isError && !isRefetching && !isPending"
-    >
+    <div class="flex flex-col justify-center w-full items-center">
       <div class="w-full flex mb-4 justify-end items-center">
         <span class="mr-3 font-medium">Select provider</span>
         <select
@@ -63,6 +57,7 @@ function setFallbackImage(e: Event) {
       </div>
       <div
         class="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 grid-rows-1 gap-4 w-full"
+        v-if="data?.length && !isError && !isRefetching && !isPending"
       >
         <NuxtLink
           v-for="(item, index) in data"
@@ -71,7 +66,7 @@ function setFallbackImage(e: Event) {
           rel="noopener noreferrer"
           target="_blank"
         >
-          <Card class="h-full">
+          <Card class="h-full w-full pb-5">
             <NuxtImg
               :src="item.thumbnail"
               :alt="item.title"
@@ -86,12 +81,18 @@ function setFallbackImage(e: Event) {
             </CardHeader>
             <CardContent>
               <CardDescription>
-                {{ item.description }}
+                {{ decodeHtml(item.description) }}
               </CardDescription>
             </CardContent>
           </Card>
         </NuxtLink>
       </div>
     </div>
+    <span class="font-bold text-xl" v-if="isPending || isRefetching"
+      >Loading....</span
+    >
+    <span class="font-bold text-xl" v-if="isError && !isRefetching">{{
+      error?.message
+    }}</span>
   </TransitionLayout>
 </template>

@@ -8,12 +8,8 @@ type ListProviderBeritaProps =
   | "cnn"
   | "jpnn"
   | "kumparan"
-  | "merdeka"
-  | "okezon"
   | "republika"
   | "sindonews"
-  | "suara"
-  | "tempo"
   | "tribun";
 
 export const useStore = defineStore("store", {
@@ -26,12 +22,8 @@ export const useStore = defineStore("store", {
         "cnn",
         "jpnn",
         "kumparan",
-        "merdeka",
-        "okezon",
         "republika",
         "sindonews",
-        "suara",
-        "tempo",
         "tribun",
       ] as ListProviderBeritaProps[],
     },
@@ -75,7 +67,7 @@ export const useStore = defineStore("store", {
 
         return response.data;
       } catch (err: any) {
-        throw new Error(`Failed to fetch data! Because: ${err.message}`);
+        throw new Error(`Gagal mendapatkan data!`);
       }
     },
     async getBerita(): Promise<BeritaProps[] | undefined> {
@@ -99,7 +91,7 @@ export const useStore = defineStore("store", {
 
         return response.data.posts;
       } catch (err: any) {
-        throw new Error(`Failed to fetch data! Because: ${err.message}`);
+        throw new Error(`Gagal mendapatkan data!`);
       }
     },
     async getDetail(urutan: number): Promise<AsmaulHusnaProps | undefined> {
@@ -115,7 +107,7 @@ export const useStore = defineStore("store", {
 
         return response.data;
       } catch (err: any) {
-        throw new Error(`Failed to fetch data! Because: ${err.message}`);
+        throw new Error(`Gagal mendapatkan data!`);
       }
     },
   },

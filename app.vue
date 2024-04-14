@@ -25,7 +25,12 @@ useSeoMeta({
       <NuxtPage />
     </section>
   </main>
-  <Button class="fixed right-4 bottom-4" v-if="scroll > 50" @click="backToTop">
+  <Button
+    size="icon"
+    class="fixed right-4 bottom-4"
+    v-if="scroll > 50"
+    @click="backToTop"
+  >
     <ArrowUpIcon />
   </Button>
 </template>

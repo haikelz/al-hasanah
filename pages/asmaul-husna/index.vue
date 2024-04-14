@@ -41,16 +41,9 @@ function setLimit(e: Event) {
 
 <template>
   <TransitionLayout
-    class="w-full min-h-screen pt-24 pb-12 flex justify-center items-center flex-col"
+    class="w-full min-h-screen pt-24 pb-12 flex justify-start items-center flex-col"
   >
-    <span class="font-bold text-xl" v-if="isPending || isRefetching"
-      >Loading....</span
-    >
-    <span class="font-bold text-xl" v-if="isError">{{ error?.message }}</span>
-    <div
-      v-if="data?.length && !isRefetching && !isError && !isPending"
-      class="flex flex-col justify-center items-center"
-    >
+    <div class="flex w-full flex-col justify-center items-center">
       <div class="w-full flex justify-end items-center mb-4">
         <div>
           <span class="mr-3 font-medium">Select limit per page</span>
@@ -69,6 +62,7 @@ function setLimit(e: Event) {
       </div>
       <div
         class="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 grid-rows-1 gap-4 w-full"
+        v-if="data?.length && !isRefetching && !isError && !isPending"
       >
         <NuxtLink
           v-for="item in data"
@@ -93,7 +87,10 @@ function setLimit(e: Event) {
           </Card>
         </NuxtLink>
       </div>
-      <div class="flex justify-center items-center space-x-3 flex-wrap mt-8">
+      <div
+        class="flex justify-center items-center space-x-3 flex-wrap mt-8"
+        v-if="data?.length && !isRefetching && !isError && !isPending"
+      >
         <Button
           v-bind:variant="
             state.asmaulHusna.page === item ? 'default' : 'outline'
@@ -104,5 +101,11 @@ function setLimit(e: Event) {
         >
       </div>
     </div>
+    <span class="font-bold text-xl" v-if="isPending || isRefetching"
+      >Loading....</span
+    >
+    <span class="font-bold text-xl" v-if="isError && !isRefetching">{{
+      error?.message
+    }}</span>
   </TransitionLayout>
 </template>
