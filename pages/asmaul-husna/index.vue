@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useQuery } from "@tanstack/vue-query";
+import slugify from "slugify";
 import TransitionLayout from "~/components/TransitionLayout.vue";
 import { Button } from "~/components/ui/button";
 import {
@@ -9,8 +11,6 @@ import {
   CardTitle,
 } from "~/components/ui/card";
 import { useStore } from "~/store";
-import { useQuery } from "@tanstack/vue-query";
-import slugify from "slugify";
 
 useSeoMeta({
   title: "Asma'ul Husna",
@@ -60,7 +60,6 @@ function setLimit(e: Event) {
             v-model="state.asmaulHusna.limit"
             class="text-neutral-950"
           >
-            <option :value="10">10</option>
             <option :value="20">20</option>
             <option :value="30">30</option>
             <option :value="40">40</option>
@@ -73,7 +72,9 @@ function setLimit(e: Event) {
       >
         <NuxtLink
           v-for="item in data"
-          :to="'/asmaul-husna/' + slugify(item.urutan.toString())"
+          :to="
+            '/asmaul-husna/' + slugify(item.urutan.toString(), { lower: true })
+          "
           :key="item.urutan"
         >
           <Card class="h-full">
@@ -92,7 +93,7 @@ function setLimit(e: Event) {
           </Card>
         </NuxtLink>
       </div>
-      <div class="space-x-3 mt-8">
+      <div class="flex justify-center items-center space-x-3 flex-wrap mt-8">
         <Button
           v-bind:variant="
             state.asmaulHusna.page === item ? 'default' : 'outline'
