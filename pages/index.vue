@@ -29,12 +29,13 @@ useSeoMeta({
           memberdayakan.
         </p>
         <NuxtLink to="/asmaul-husna">
-          <Button class="font-bold"> Explore</Button>
+          <Button class="font-bold">Explore</Button>
         </NuxtLink>
       </div>
       <img
-        src="/mosque.jpg"
+        src="~/assets/images/mosque.jpg"
         class="rounded-lg w-full h-[300px] md:w-[350px] md:hs-[350px] lg:w-[450px] lg:h-[450px] aspect-square"
+        alt="mosque"
       />
     </div>
   </TransitionLayout>
