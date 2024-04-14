@@ -18,9 +18,9 @@ const scroll = useScroll();
   <header
     :class="
       cn(
-        'w-full fixed top-0 z-50 px-4 flex justify-center items-center',
+        'w-full fixed top-0 z-50 px-4 flex justify-center dark:bg-neutral-950 items-center bg-white/80',
         scroll >= 90
-          ? 'border-b bg-white/80 dark:bg-neutral-950 backdrop-blur-md border-neutral-300 dark:border-neutral-600'
+          ? 'border-b backdrop-blur-md border-neutral-300 dark:border-neutral-600'
           : ''
       )
     "
