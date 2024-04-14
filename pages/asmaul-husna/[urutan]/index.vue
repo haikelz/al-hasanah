@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import { useQuery } from "@tanstack/vue-query";
+import { CheckIcon, LinkIcon } from "lucide-vue-next";
+import { useRoute } from "vue-router";
 import TransitionLayout from "~/components/TransitionLayout.vue";
 import { Button } from "~/components/ui/button";
 import {
@@ -10,9 +13,6 @@ import {
 } from "~/components/ui/card";
 import { useCopyClipboard } from "~/composables";
 import { useStore } from "~/store";
-import { useQuery } from "@tanstack/vue-query";
-import { CheckIcon, LinkIcon } from "lucide-vue-next";
-import { useRoute } from "vue-router";
 
 useSeoMeta({
   title: "Detail",
@@ -43,9 +43,9 @@ const { isSuccess, copyText } = useCopyClipboard();
     <div v-if="data">
       <Card class="h-full">
         <CardHeader>
-          <p>{{ data.urutan }}</p>
+          {{ data.urutan }}
           <CardTitle>
-            <p>{{ data.arab }}</p>
+            {{ data.arab }}
           </CardTitle>
         </CardHeader>
         <CardContent>

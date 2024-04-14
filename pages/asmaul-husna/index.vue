@@ -73,9 +73,9 @@ function setLimit(e: Event) {
         >
           <Card class="h-full">
             <CardHeader>
-              <p>{{ item.urutan }}</p>
+              {{ item.urutan }}
               <CardTitle>
-                <p>{{ item.arab }}</p>
+                {{ item.arab }}
               </CardTitle>
             </CardHeader>
             <CardContent>
